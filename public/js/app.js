@@ -20,11 +20,11 @@ excelData.addEventListener('submit', (e) => {
         if(result.error){
             messageOne.textContent = result.error
         }else{
-            console.log(result.length);
-            for(let i=0;i<result.length;i++){
-                data = result[i];
-            }
-            messageOne.textContent = data
+            // console.log(result.length);
+            // for(let i=0;i<result.length;i++){
+            //     data = result[i];
+            // }
+            messageOne.textContent = result
         }
         
     })
