@@ -1,5 +1,6 @@
-const express = require('express')
-const hbs = require('hbs')
+const express = require('express');
+const hbs = require('hbs');
+const cors = require('cors')
 // const ApiResponse = require('./utils/ApiResponse.js');
 
 const fs = require('fs');
@@ -20,8 +21,9 @@ app.set('views', viewPath);
 hbs.registerPartials(partialPath)
 app.use(express.static(pathPublic))
 
-app.use(express.json({limiit :"16kb"}));
-app.use(express.urlencoded({extended : true, limit : "16kb"}));
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(cors());
 
 
 
@@ -52,7 +54,7 @@ app.get('/excel_report', async (req,res) => {
         function searchInSheet(sheet, searchValue) {
             try {
                 const range = xlsx.utils.decode_range(sheet['!ref']);
-                console.log(range)
+                // console.log(range)
                 for (let rowNum = range.s.r; rowNum <= range.e.r; rowNum++) {
                     for (let colNum = range.s.c; colNum <= range.e.c; colNum++) {
                         const cellAddress = { c: colNum, r: rowNum };
@@ -101,11 +103,12 @@ app.get('/excel_report', async (req,res) => {
                                     // console.log(test_data);
                                     // return test_data;
                                     result.push({
+                                        searchValue,
                                         filePath,
                                         sheetName,
                                         cellRef
                                     });
-                                    console.log(`Found "${searchValue}" in file: ${filePath}, sheet: ${sheetName}, cellRef: ${cellRef}`);
+                                    // console.log(`Found "${searchValue}" in file: ${filePath}, sheet: ${sheetName}, cellRef: ${cellRef}`);
                                     
                                     //    return res.json({ excelReport: test_data });
                                 }
@@ -121,7 +124,7 @@ app.get('/excel_report', async (req,res) => {
             
         // Run the search
         const response = await searchInFolder(folderPath, searchValue);
-        res.send(response)
+        res.send(response);
 
     
 })

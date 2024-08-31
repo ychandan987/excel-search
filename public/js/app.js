@@ -20,11 +20,24 @@ excelData.addEventListener('submit', (e) => {
         if(result.error){
             messageOne.textContent = result.error
         }else{
-            // console.log(result.length);
-            // for(let i=0;i<result.length;i++){
-            //     data = result[i];
-            // }
-            messageOne.textContent = result
+            console.log(result);
+            let data1 = [];
+            let res_length = result.length;
+            console.log(res_length);
+            
+            for(let i=0;i<res_length;i++){
+                // data = "Found  "+result[i].searchValue+ " in file: "+result[i].filePath+ ", sheet: "+result[i].sheetName+ ", cellRef: "+result[i].cellRef;
+                data1 = "<table>"
+                "<td>"+result[i].searchValue+ "</td>"
+                "<td>"+result[i].filePath+ "</td>"
+                "<td>"+result[i].sheetName+ "</td>"
+                "<td>"+result[i].cellRef+ "</td>"
+           "</table>"
+                // data = result[i];
+                console.log(data1);
+            }
+            messageOne.textContent = data1
+            
         }
         
     })
