@@ -22,7 +22,7 @@ hbs.registerPartials(partialPath)
 app.use(express.static(pathPublic))
 
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 
@@ -36,8 +36,8 @@ app.get('',(req,res) =>{
 
 
 
-app.get('/excel_report', async (req,res) => {
-    const test = req.query.address;
+app.post('/excel_report', async (req,res) => {
+    const test = req.body.address;
     console.log(test);
     
     if(!test){
